@@ -60,6 +60,26 @@ public Map<String,String> Addproduct(@RequestBody Products p){
 
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/userlogin", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> userLogin(@RequestBody Userregistration r){
+        System.out.println(r.getEmail());
+        List<Userregistration> result=(List<Userregistration>) dao1.userLogin(r.getEmail(),r.getPassword());
+        HashMap<String,String> st=new HashMap<>();
+        if (result.size()==0){
+            st.put("status","failed");
+            st.put("message","user doesn't exist");
+
+        }
+        else{
+            int id =result.get(0).getId();
+            st.put("userid",String.valueOf(id));
+            st.put("message","user login success");
+        }
+        return st;
+    }
+
+
 
 
 
