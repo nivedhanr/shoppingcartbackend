@@ -79,7 +79,11 @@ public Map<String,String> Addproduct(@RequestBody Products p){
         return st;
     }
 
-
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/getUserById", consumes = "application/json", produces = "application/json")
+    public List<Userregistration> GetUserById(@RequestBody Userregistration f){
+        return (List<Userregistration>) dao1.FindUser(f.getId());
+    }
 
 
 
